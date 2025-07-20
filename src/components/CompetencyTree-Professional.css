@@ -1,0 +1,582 @@
+/* CompetencyTree.css - Diseño Profesional para Institución Académica */
+
+.competency-tree-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #334155;
+}
+
+
+/* Header con estadísticas - Estilo Corporativo */
+
+.student-stats-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-bottom: 2px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    width: 28px;
+    height: 28px;
+    color: #3b82f6;
+    background: #eff6ff;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+
+/* Filtros por área - Estilo Profesional */
+
+.competency-filters {
+    position: absolute;
+    top: 140px;
+    left: 24px;
+    right: 24px;
+    z-index: 999;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+}
+
+.filter-btn {
+    padding: 12px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-btn:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+.filter-btn.active {
+    background: var(--area-color, #3b82f6);
+    border-color: var(--area-color, #3b82f6);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+
+/* Canvas del árbol - Diseño Limpio */
+
+.tree-canvas {
+    position: absolute;
+    top: 240px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+}
+
+
+/* Conexiones SVG - Estilo Profesional */
+
+.tree-connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.connection {
+    stroke-linecap: round;
+    stroke-width: 2;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.connection.prerequisite {
+    stroke: #10b981;
+    stroke-dasharray: none;
+}
+
+.connection.recommended {
+    stroke: #f59e0b;
+    stroke-dasharray: 5, 5;
+}
+
+.connection.alternative {
+    stroke: #8b5cf6;
+    stroke-dasharray: 3, 3;
+}
+
+.connection.unlocked {
+    opacity: 1;
+    stroke-width: 3;
+}
+
+.connection.locked {
+    opacity: 0.3;
+    stroke: #94a3b8;
+}
+
+
+/* Nodos de cursos - Diseño Corporativo */
+
+.course-nodes {
+    position: relative;
+    z-index: 2;
+}
+
+.course-node {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.course-node.available {
+    --border-color: #10b981;
+    --background-color: #ecfdf5;
+}
+
+.course-node.passed {
+    --border-color: #3b82f6;
+    --background-color: #eff6ff;
+}
+
+.course-node.enrolled {
+    --border-color: #f59e0b;
+    --background-color: #fffbeb;
+}
+
+.course-node.failed {
+    --border-color: #ef4444;
+    --background-color: #fef2f2;
+}
+
+.course-node.locked {
+    --border-color: #94a3b8;
+    --background-color: #f8fafc;
+    opacity: 0.7;
+}
+
+.course-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    background: var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    z-index: 3;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.course-content {
+    width: 100%;
+    height: 100%;
+    background: var(--background-color);
+    border: 3px solid var(--border-color);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.course-node:hover .course-content {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-width: 4px;
+}
+
+.course-code {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--border-color);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.course-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.course-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.course-credits {
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 600;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.course-points {
+    font-size: 10px;
+    color: #059669;
+    font-weight: 700;
+    background: #d1fae5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid #a7f3d0;
+}
+
+.course-area-indicator {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+}
+
+.prerequisites-indicator {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 24px;
+    height: 24px;
+    background: #ef4444;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    z-index: 3;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Tooltip - Estilo Profesional */
+
+.course-tooltip {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    color: #1e293b;
+}
+
+.tooltip-header strong {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.tooltip-code {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+    background: #f1f5f9;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.tooltip-description {
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.tooltip-skills {
+    margin-bottom: 16px;
+}
+
+.tooltip-skills strong {
+    color: #1e293b;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.skill-tag {
+    background: #eff6ff;
+    color: #1e40af;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid #dbeafe;
+}
+
+.tooltip-prereqs {
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.tooltip-prereqs strong {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+
+/* Controles de zoom - Estilo Profesional */
+
+.zoom-controls {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 8px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
+.zoom-controls button {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #475569;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.zoom-controls button:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #3b82f6;
+    transform: scale(1.1);
+}
+
+.zoom-controls span {
+    color: #1e293b;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 50px;
+    text-align: center;
+}
+
+
+/* Estados especiales con colores corporativos */
+
+.course-node.passed .course-content {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-color: #3b82f6;
+}
+
+.course-node.available .course-content {
+    background: linear-gradient(135deg, #ecfdf5 0%, #dcfce7 100%);
+    border-color: #10b981;
+    animation: available-pulse 3s ease-in-out infinite;
+}
+
+@keyframes available-pulse {
+    0%,
+    100% {
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+    }
+    50% {
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+    }
+}
+
+.course-node.locked .course-content {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    filter: grayscale(0.5);
+}
+
+.course-node.enrolled .course-content {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border-color: #f59e0b;
+    animation: enrolled-glow 2s ease-in-out infinite;
+}
+
+@keyframes enrolled-glow {
+    0%,
+    100% {
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+    }
+    50% {
+        box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+    }
+}
+
+.course-node.failed .course-content {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    border-color: #ef4444;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 1024px) {
+    .competency-filters {
+        top: 160px;
+        gap: 8px;
+        padding: 12px;
+    }
+    .filter-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    .course-node {
+        width: 120px;
+        height: 120px;
+    }
+    .course-tooltip {
+        width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .student-stats-header {
+        padding: 16px;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    .stat-item {
+        padding: 16px;
+    }
+    .stat-value {
+        font-size: 20px;
+    }
+    .competency-filters {
+        top: 140px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .course-node {
+        width: 100px;
+        height: 100px;
+    }
+    .course-tooltip {
+        width: 260px;
+    }
+}
