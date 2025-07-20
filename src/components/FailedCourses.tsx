@@ -11,7 +11,6 @@ interface FailedCoursesProps {
 
 const FailedCourses: React.FC<FailedCoursesProps> = ({
   failedCourses,
-  studentProgress,
   onRetakeAction
 }) => {
   const getAreaColor = (area: string) => {

@@ -41,8 +41,8 @@ const mockPlannedCourses: PlannedCourse[] = [
 ];
 
 const PlanningMode: React.FC = () => {
-  const [selectedSemester, setSelectedSemester] = useState<number | null>(null);
-  const [draggedCourse, setDraggedCourse] = useState<PlannedCourse | null>(null);
+  const [, setSelectedSemester] = useState<number | null>(null);
+  const [, setDraggedCourse] = useState<PlannedCourse | null>(null);
 
   // Agrupar cursos por semestre
   const groupedCourses = mockPlannedCourses.reduce((acc, course) => {
@@ -77,12 +77,6 @@ const PlanningMode: React.FC = () => {
 
   const handleDragEnd = () => {
     setDraggedCourse(null);
-  };
-
-  const getSemesterStatus = (semester: number) => {
-    if (semester <= 3) return 'completed';
-    if (semester === 4) return 'current';
-    return 'planned';
   };
 
   const getSemesterColor = (status: string) => {

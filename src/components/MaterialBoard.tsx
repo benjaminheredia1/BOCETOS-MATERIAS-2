@@ -42,9 +42,7 @@ const mockCourses: Course[] = [
   { id: '18', code: 'ING301', name: 'Ingeniería de Software', credits: 4, status: 'locked', semester: 5, prerequisites: ['BASE101'] },
 ];
 
-interface MaterialBoardProps {}
-
-const MaterialBoard: React.FC<MaterialBoardProps> = () => {
+const MaterialBoard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSemester, setSelectedSemester] = useState<number | null>(null);
 
